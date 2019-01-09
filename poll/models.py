@@ -14,6 +14,10 @@ class Question(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def choices(self):
+        return self.choice_set.all()
+
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
@@ -23,6 +27,10 @@ class Choice(models.Model):
 
     def __str__(self):
         return self.text
+
+    @property
+    def votes(self):
+        return self.answer_set.count()
 
 
 class Answer(models.Model):
