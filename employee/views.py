@@ -40,3 +40,12 @@ def employee_edit(request, id=None):
     else:
         user_form = UserForm(instance=user)
         return render(request, 'employee/edit.html', {'user_form':user_form})
+
+
+def employee_delete(request, id=None):
+    user = get_object_or_404(User, id=id)
+    if request.method == 'POST':
+        user.delete()
+        return redirect(reverse('employee_list'))
+    else:
+        return render(request, 'employee/delete.html', {'user':user})
