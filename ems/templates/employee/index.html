@@ -1,20 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a href="/employee/add">Add employee</a>
-    <h2>List of {{title}}</h2>
-    {% if users %}
-        <ul>
-            {% for user in users %}
-                <li>
-                    {{user.first_name}} &nbsp; {{user.last_name}}
-                    <a href="/employee/{{user.id}}/details/">Details</a>
-                    <a href="/employee/{{user.id}}/edit/">Edit</a>
-                    <a href="/employee/{{user.id}}/delete/">Delete</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No users available.</p>
-    {% endif %}
+<div class="row">
+    <div class="col-md-8">
+        <p>
+            <div class="float-left"><h3>List of {{title}}</h3></div>
+            <a class="btn btn-success float-right mb-2" href="/employee/add">Add employee</a>
+        </p>
+        {% if users %}
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>
+                                {{user.first_name}} {{user.last_name}} <strong>{{user.email}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-primary" href="/employee/{{user.id}}/details/">Details</a>
+                                <a class="btn btn-warning" href="/employee/{{user.id}}/edit/">Edit</a>
+                                <a class="btn btn-danger" href="/employee/{{user.id}}/delete/">Delete</a> 
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No users available.</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock content %}

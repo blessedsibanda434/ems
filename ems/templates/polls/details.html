@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Detail page</h2>
-    <h3>{{question.title}}</h3>
-    {% for choice in question.choices %}
-        <p>{{choice.text}}: ({{choice.votes}})</p>
-    {% empty %}
-        <p>There is no choice available for this question</p>
+    <p>
+        <h3>{{question.title}}</h3>
+    </p>
+    <div class="list-group col-md-6">
+        {% for choice in question.choices %}
+            <a class="list-group-item" href="/polls/{{question.id}}">
+                <span class="badge badge-pill badge-primary float-right">{{choice.votes}}</span>
+                {{choice.text}}
+            </a>
+        {% empty %}
+            <p class="list-group-item">There is no choice available for this question</p>
     {% endfor %}
+    </div>
     <p class="poll-creator">Poll created by {{question.created_by.username}}</p>
 {% endblock content %}

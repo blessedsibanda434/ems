@@ -6,11 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>EMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/custom.css' %}" />
 
 </head>
 <body>
-    <h1>Employee Management System</h1>
-    {% block content %}{% endblock content %}
+    {% include 'header.html' %}
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+    
+<script src="{% static 'js/jquery-3.3.1.slim.min.js' %}" ></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>
