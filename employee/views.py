@@ -1,7 +1,31 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.models import User
-
+from django.contrib.auth import authenticate, login, logout
 from employee.forms import UserForm
+
+def user_login(request):
+    context = {}
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect(reverse('user_success'))
+        else:
+            context['error'] = "Provide valid credentials"
+            return render(request, 'auth/login.html', context)
+    else:
+        return render(request, 'auth/login.html', context)
+
+def success(request):
+    context = {'user': request.user }
+    return render(request, 'auth/success.html', context) 
+
+def user_logout(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect(reverse('user_login')) 
 
 def employee_list(request):
     context = {
@@ -49,3 +73,4 @@ def employee_delete(request, id=None):
         return redirect(reverse('employee_list'))
     else:
         return render(request, 'employee/delete.html', {'user':user})
+
