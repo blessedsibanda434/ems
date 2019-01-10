@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><strong>First Name:</strong> {{user.first_name}}</p>
+    <p><strong>Last Name:</strong> {{user.last_name}}</p>
+    <p><strong>Email:</strong> {{user.email}}</p>
+    <p><strong>Salary:</strong> {{user.profile.salary}}</p>
+    <p>
+        <a href="/employee/{{user.id}}/edit/">Edit</a>
+        <a href="/employee/{{user.id}}/delete/">Delete</a>
+    </p>
+{% endblock content %}
